@@ -113,7 +113,7 @@ public class EntitiesConfig extends SuperConfig {
                     double maxMoney = 0;
                     String permission = null;
                     int limit = 0;
-                    DivisionMethod divisionMethod = DivisionMethod.LAST_HIT;
+                    DivisionMethod divisionMethod = DivisionMethod.SHARED;
 
                     // Enabled value
                     if (getConfig().isSet(entity + "." + world + ".Money.Enabled")) {
@@ -420,7 +420,7 @@ public class EntitiesConfig extends SuperConfig {
                     double chance = 100;
                     String permission = null;
                     int limit = 0;
-                    DivisionMethod divisionMethod = DivisionMethod.LAST_HIT;
+                    DivisionMethod divisionMethod = DivisionMethod.SHARED;
 
                     // Enabled value
                     if (getConfig().isSet(entity + "." + world + ".Cash-transfer.Enabled")) {
