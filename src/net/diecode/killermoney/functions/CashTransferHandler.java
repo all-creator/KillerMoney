@@ -161,31 +161,24 @@ public class CashTransferHandler implements Listener {
                             continue;
                         }
                     }
-
-                    // Calculating the money
-                    BigDecimal x = ed.getDamage().divide(new BigDecimal(victim.getMaxHealth()),
-                            BigDecimal.ROUND_HALF_EVEN);
-
+                    
                     // Calculating remaining limit
                     remainingLimit = new BigDecimal(ctp.getLimit() - ctp.getCurrentLimitValue(ed.getPlayerUUID())
                             .doubleValue()).setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
 
                     // Divided money by victim damage
-                    dividedMoney = new BigDecimal(money.multiply(x).doubleValue());
+                    dividedMoney = new BigDecimal(money.doubleValue());
 
                     // Use multipliers ( Permission based and global )
                     //dividedMoney = dividedMoney.multiply(new BigDecimal(getMoneyMultiplier(p)));
-                    //dividedMoney = dividedMoney.multiply(new BigDecimal(MultiplierHandler.getGlobalMultiplier()));
+                    dividedMoney = dividedMoney.multiply(new BigDecimal(MultiplierHandler.getGlobalMultiplier()));
 
                     if (!hasLimitBypass) {
                         if ((ctp.getLimit() > 0) && (dividedMoney.compareTo(remainingLimit) == 1)) {
                             dividedMoney = remainingLimit;
                         }
                     }
-
-                    // Set scale
-                    dividedMoney = dividedMoney.setScale(DefaultConfig.getDecimalPlaces(), BigDecimal.ROUND_HALF_EVEN);
-
+                    
                     ed.setCalculatedMoney(dividedMoney);
                     filteredDamagers.add(ed);
                 }
